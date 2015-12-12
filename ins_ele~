@@ -1,0 +1,26 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include "library.h"
+
+struct node * ins_ele(int a,struct node * temp)
+{
+int b;
+printf("\nAt what position you want to insert element\n1.At first position.\n2.At last position.\n3.At ith position.\nYour choice: ");
+scanf("%d",&b);
+switch(b)
+{
+case 1:
+temp=first(a,temp);
+break;
+case 2:
+temp=end(a,temp);
+break;
+case 3:
+temp=ith(a,temp);
+break;
+default:
+printf("ACCESS DENIED");
+}
+printf("\nElement inserted.\n");
+return temp;
+}

@@ -1,0 +1,17 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include "library.h"
+typedef struct tree
+{  
+int data;
+struct tree *left,*right;
+int ht;
+}tree;
+
+
+tree * LR(tree *T)
+{
+               T->left=rotateleft(T->left);
+               T=rotateright(T);
+               return(T);
+}

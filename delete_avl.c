@@ -1,0 +1,56 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include "library.h"
+
+
+
+tree * delete_avl(tree *T,int x)
+{       tree *p;
+
+   if(T==NULL)
+    {
+       return NULL;
+    }
+  else
+
+       if(x > T->data) 
+      {
+           T->right=delete(T->right,x);
+                if(diff(T)==2)
+                   if(diff(T->left)>=0)
+                         T=LL(T);
+                   else
+                         T=LR(T);
+      }
+       else
+           if(x<T->data)
+           {
+            T->left=delete(T->left,x);
+               if(diff(T)==-2)
+                  if(diff(T->right)<=0)
+                      T=RR(T);
+                  else
+                      T=RL(T);
+           }
+           else
+           {
+            if(T->right !=NULL)
+            {  
+              p=T->right;
+              while(p->left != NULL)
+              p=p->left;
+              T->data=p->data;
+              T->right=delete(T->right,p->data);
+                  if(diff(T)==2)
+                     if(diff(T->left)>=0)
+                             T=LL(T);
+                     else
+                             T=LR(T);
+             }
+             else
+                return(T->left);
+
+           }
+               T->ht=height(T);
+               return(T);
+}

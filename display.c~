@@ -1,0 +1,27 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include "library.h"
+struct node
+{
+int info;
+struct node *link;
+}
+
+void display(struct node *start)
+{
+struct node *temp;
+temp=start;
+if(start==NULL)
+{
+printf("\nList Empty");
+}
+else
+{
+while(temp!=NULL)
+{
+printf("\n%d",temp->info);
+temp=temp->link;
+}
+}
+}
+

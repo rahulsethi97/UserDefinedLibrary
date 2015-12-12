@@ -1,0 +1,64 @@
+#include<stdio.h> 
+#include "library.h"
+ #include<stdlib.h>
+
+
+void queue()
+{
+     struct node *front=NULL,*rear=NULL;
+     int i=0;
+     front=NULL;
+   while(1)
+     {
+     printf(" \n1. Create a Queue");
+     printf(" \n2. Push to Queue");
+     printf(" \n3. Pop from Queue");
+     printf(" \n4. Display info of Queue");
+     printf(" \n5. Exit\n");
+     printf(" \nYour Choice: ");
+          scanf("%d",&i);
+          switch(i)
+          {
+                 case 1:
+                {
+                     int value,l,m;
+                     printf("\nHow many elements: ");
+                     scanf("%d",&l);
+                    for(m=0;m<l;m++)
+                    { 
+                     printf("\nEnter a value: ");
+                     scanf("%d",&value);
+                     enqueue(value,&rear,&front);
+                    } 
+                     break;
+                }
+                case 2:
+                {
+                     int value;
+                     printf("\nEnter a value to push into Queue: ");
+                     scanf("%d",&value);
+                     enqueue(value,&rear,&front); 
+                     break;
+                }
+                case 3:
+                {
+                     dequeue(&rear);
+                     break;
+                }
+                case 4:
+                {
+                     display_queue(rear);
+                     break;
+                }
+                case 5:
+                {    
+                       system("reset");
+                     queuemain();
+                }
+                default:
+                {
+                     printf("\nwrong choice for operation");
+                }
+          }
+     }
+}

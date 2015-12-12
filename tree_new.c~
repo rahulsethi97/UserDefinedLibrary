@@ -1,0 +1,204 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+typedef struct tree
+{  
+int data;
+struct tree *left,*right;
+int ht;
+}tree;
+
+
+void func(tree *);
+
+void preorder(tree *T)
+{
+               if(T!=NULL)
+               {
+                              printf("%d ",T->data);
+                              preorder(T->left);
+                              preorder(T->right);
+               }
+}
+void inorder(tree *T)
+{
+               if(T!=NULL)
+               {
+                              inorder(T->left);
+                              printf("%d ",T->data);
+                              inorder(T->right);
+               }
+
+}
+
+void postorder(tree *T) {
+    if (T!= NULL) {
+      postorder(T->left);
+       postorder(T->right);
+       printf("%d ",T->data);
+         }
+}
+
+
+void display_tree(tree *root)
+{
+int a;
+printf("\n1.Inorder 2.Preorder 3.Postorder Your choice: ");
+scanf("%d",&a);
+switch(a)
+{
+case 1:
+inorder(root);
+break;
+case 2:
+preorder(root);
+break;
+case 3:
+postorder(root);
+break;
+default:
+printf("\nWrong choice\n");
+}
+}
+
+tree* create()
+{
+return ((tree*)malloc(sizeof(tree)));
+}
+
+
+tree * create_tree(tree *root)
+{  
+  int data;
+  tree *temp;
+ 
+root=create();
+printf("\nEnter the value of root: ");
+scanf("%d",&data);
+root->data=data;
+root->left=NULL;
+root->right=NULL;
+temp=root;
+ 
+func(temp);
+ return root;   
+
+  
+ 
+}
+
+
+void func(tree *temp)
+{
+
+int a;
+  int data;
+tree *newl,*newr;
+ 
+while(1)
+{
+printf("\nFor %d node \n1.Left 2.Right 3.Both 4.No child 5.Stop \nYour choice: ",temp->data);
+    scanf("%d",&a);
+  
+   if(a==1)
+        {
+           newl=create();
+           newl->left=NULL;
+           newl->right=NULL;
+           printf("\nEnter the value of left child of %d: ",temp->data);
+           scanf("%d",&data);
+           newl->data=data;
+           temp->left=newl;
+           temp=newl;
+        }
+else if(a==2)
+        {
+           newr=create();
+           newr->left=NULL;
+           newr->right=NULL;
+           printf("\nEnter the value of right child of %d: ",temp->data);
+           scanf("%d",&data);
+           newr->data=data;
+           temp->right=newr;
+           temp=newr;
+        }
+  
+  else if(a==3)
+        {   
+           int c;
+           newl=create();
+           newl->left=NULL;
+           newl->right=NULL;
+           printf("\nEnter the value of left child of %d: ",temp->data);
+           scanf("%d",&data);
+           newl->data=data;
+temp->left=newl;
+     
+           
+           newr=create();
+           newr->left=NULL;
+           newr->right=NULL;
+           printf("\nEnter the value of right child of %d: ",temp->data);
+           scanf("%d",&data);
+           newr->data=data;
+temp->right=newr;
+       
+           
+printf("\nWant to move to 1.left child 2.right child 3.both 4.No child.?\nYour choice: ");
+scanf("%d",&c);
+             if(c==1)
+                  temp=newl;
+             else if(c==2)
+                  temp=newr;
+              else if(c==3)
+                  { 
+                   temp=newl;
+                   func(temp);
+                   temp=newr;
+                   func(temp);
+                  }
+              else
+                break;
+              
+                      
+          
+         }
+else if(a==4||a==5)
+         {
+           break;
+         }
+}
+}
+
+
+
+
+
+void main()
+{
+int a;
+tree *root=NULL;
+while(1)
+{
+printf("\n1.Create.\n2.Display.\n3.Exit.\n4.Your choice:");
+
+scanf("%d",&a);
+
+
+
+switch(a)
+{
+case 1:
+root=create_tree(root);
+break;
+case 2:
+display_tree(root);
+break;
+case 3:
+exit(0);
+}
+}
+}
+
+
+

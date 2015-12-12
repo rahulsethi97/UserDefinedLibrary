@@ -1,0 +1,101 @@
+#include<stdio.h> 
+
+ #include<stdlib.h>
+ struct node
+ {
+        int info;
+        struct node* link;
+ };
+
+void dequeue(struct node **rear)
+{
+       struct node *temp, *var=*rear;
+      if(var==*rear)
+      {
+             *rear = (*rear)->link;
+             free(var);
+      }
+      else
+      printf("\nQueue Empty");
+}
+
+void enqueue(int value,struct node **rear,struct node **front)
+{
+     struct node *temp;
+     temp=(struct node *)malloc(sizeof(struct node));
+     temp->info=value;
+     if (*front == NULL)
+     {
+           *front=temp;
+           (*front)->link=NULL;
+           *rear=*front;
+     }
+     else
+     {
+           (*front)->link=temp;
+           *front=temp;
+           (*front)->link=NULL;
+     }
+}
+
+void display(struct node *rear)
+{
+     struct node *var=rear;
+     if(var!=NULL)
+     {
+           printf("\nElements are as:  ");
+           while(var!=NULL)
+           {
+                printf("\t%d",var->info);
+                var=var->link;
+           }
+     printf("\n");
+     } 
+     else
+     printf("\nQueue is Empty");
+}
+
+int main()
+{
+     struct node *front=NULL,*rear=NULL;
+     int i=0;
+     front=NULL;
+     printf(" \n1. Push to Queue");
+     printf(" \n2. Pop from Queue");
+     printf(" \n3. Display info of Queue");
+     printf(" \n4. Exit\n");
+     while(1)
+     {
+          printf(" \nChoose Option: ");
+          scanf("%d",&i);
+          switch(i)
+          {
+                case 1:
+                {
+                     int value;
+                     printf("\nEnter a valueber to enqueue into Queue: ");
+                     scanf("%d",&value);
+                     enqueue(value,&rear,&front); 
+                     break;
+                }
+                case 2:
+                {
+                     dequeue(&rear);
+                     break;
+                }
+                case 3:
+                {
+                     display(rear);
+                     break;
+                }
+                case 4:
+                {
+                     exit(0);
+                }
+                default:
+                {
+                     printf("\nwrong choice for operation");
+                }
+          }
+     }
+}

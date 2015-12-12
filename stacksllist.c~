@@ -1,0 +1,95 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+struct node
+{
+int info;
+struct node *link;
+};
+
+
+
+struct node * push(int c,struct node *top)
+{
+struct node *new;
+
+new=(struct node*)malloc(sizeof(struct node*));
+new->info=c;
+new->link=top;
+top=new;
+
+printf("\nItem pushed=%d",c);
+return top;
+}
+
+struct node * pop(struct node *top)
+{
+if(top==NULL)
+{
+printf("\nStack Empty");
+return 0;
+}
+else
+{
+struct node *save;
+save=top;
+top=top->link;
+
+printf("\nItem popped=%d",save->info);
+free(save);
+return top;
+
+}
+}
+
+void display(struct node * top)
+{
+int j;
+
+if(i==-1)
+{
+printf("\nStack Empty");
+}
+else
+{
+while(top!=NULL)
+{
+printf("\n%d",top->info);
+top=top->link;
+}
+}
+}
+
+
+
+int main()
+{
+int a,b,p;
+struct node *top=NULL;
+while(1)
+{
+printf("\n\n1.Push\n2.Pop\n3.Display\n4.Exit\nYour Choice: ");
+scanf("%d",&a);
+switch(a)
+{
+case 1:
+printf("\nEnter the Element: ");
+scanf("%d",&b);
+top=push(b,top);
+break;
+case 2:
+top=pop(top);
+break;
+case 3:
+display(top);
+break;
+case 4:
+exit(0);
+break;
+default:
+printf("\n\t\tWrong Choice\n\n");
+}
+}
+return 0;
+}
+

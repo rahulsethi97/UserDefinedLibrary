@@ -1,0 +1,314 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+struct node
+{
+int info;
+struct node *link;
+};
+
+
+void linked_list();struct node* ins_ele(int,struct node*);struct node* del_ele(struct node *);struct node* del_all(struct node *);struct node* del_ith(int,struct node *);struct node* del_first(struct node *);struct node* del_last(struct node *);void search(struct node*,int);void display(struct node *);struct node* create(int,struct node*);struct node* first(int,struct node *);struct node* end(int,struct node *);struct node* ith(int,struct node *);struct node* create_node();
+
+void main()
+{
+linked_list();
+}
+
+
+void linked_list()
+{
+int a,info,n,i;
+struct node *start;
+while(1)
+{
+printf("\n1.Create a list.\n2.Insert an element.\n3.Delete an element.\n4.Search an element.\n5.Display.\n6.Exit.\nYour Choice: ");
+scanf("%d",&a);
+
+switch(a)
+{
+case 1:
+printf("\nHow many elements: ");
+scanf("%d",&n);
+for(i=0;i<n;i++)
+{
+ if(i==0)
+   {
+     start=create_node();
+     printf("\nEnter the element: ");
+     scanf("%d",&info);
+     start->info=info;
+   }
+else
+  {        
+     printf("\nEnter the element: ");
+     scanf("%d",&info);
+     start=create(info,start);
+  }
+}
+break;
+case 2:
+printf("\nEnter the element you want to insert: ");
+scanf("%d",&info);
+start=ins_ele(info,start);
+break;
+case 3:
+start=del_ele(start);
+break;
+case 4:
+printf("\nEnter the element you want to search: ");
+scanf("%d",&info);
+search(start,info);
+break;
+case 5:
+display(start);
+break;
+case 6:
+exit(0);
+break;
+default:
+printf("\nWrong Choice");
+}
+}
+}
+
+
+struct node * create_node()
+{
+struct node *new;
+new=(struct node*)malloc(sizeof(struct node));
+new->link=NULL;
+return new;
+}
+
+
+struct node * create(int a,struct node *start)
+{
+struct node *new,*temp;
+temp=start;
+new=create_node();
+new->info=a;
+while(temp->link!=NULL)
+{
+temp=temp->link;
+}
+temp->link=new;
+return start;
+}
+
+
+
+
+
+
+
+struct node * ins_ele(int a,struct node * temp)
+{
+int b;
+printf("\nAt what position you want to insert element\n1.At first position.\n2.At last position.\n3.At ith position.\nYour choice: ");
+scanf("%d",&b);
+switch(b)
+{
+case 1:
+temp=first(a,temp);
+break;
+case 2:
+temp=end(a,temp);
+break;
+case 3:
+temp=ith(a,temp);
+break;
+default:
+printf("ACCESS DENIED");
+}
+printf("\nElement inserted.\n");
+return temp;
+}
+
+struct node * first(int a,struct node *start)
+{
+struct node *new;
+new=(struct node*)malloc(sizeof(struct node));
+new->info=a;
+new->link=start;
+start=new;
+return start;
+}
+
+struct node * end(int a,struct node *start)
+{
+struct node *new,*temp;
+temp=start;
+while(temp->link!=NULL)
+{
+temp=temp->link;
+}
+new=(struct node*)malloc(sizeof(struct node));
+new->link=NULL;
+new->info=a;
+temp->link=new;
+return start;
+}
+
+
+
+
+
+
+struct node * ith(int a,struct node *start)
+{
+int i,k=1;
+struct node *new,*temp1;
+temp1=start;
+printf("\nAt what position you want to insert element: ");
+scanf("%d",&i);
+
+while(k!=(i-1))
+{
+temp1=temp1->link;
+k++;
+}
+new=(struct node*)malloc(sizeof(struct node));
+new->link=temp1->link;
+new->info=a;
+temp1->link=new;
+return start;
+}
+
+
+
+
+
+struct node * del_ele(struct node *start)
+{
+int a,i;
+printf("\n1.Delete whole list.\n2.Delete First element.\n3.Delete Last Element.\n4.Delete ith element.\nYour Choice: ");
+scanf("%d",&a);
+switch(a)
+{
+case 1:
+start=del_all(start);
+break;
+case 2:
+start=del_first(start);
+break;
+case 3:
+start=del_last(start);
+break;
+case 4:
+printf("\nEnter the position of element: ");
+scanf("%d",&i);
+start=del_ith(i,start);
+break;
+default:
+printf("\nWrong choice");
+}
+return start;
+}
+
+struct node * del_all(struct node * start)
+{
+struct node *save;
+
+while(start!=NULL)
+{
+save=start;
+start=start->link;
+free(save);
+}
+printf("\nList deleted.\n");
+return start;
+}
+
+struct node * del_first(struct node *start)
+{
+struct node *save;
+save=start;
+start=start->link;
+free(save);
+printf("\nElement deleted.\n");
+return start;
+}
+
+struct node * del_last(struct node *start)
+{
+struct node *temp,*save;
+temp=start;
+while(temp->link->link!=NULL)
+{
+temp=temp->link;
+}
+save=temp->link;
+temp->link=NULL;
+free(save);
+printf("\nElement deleted.\n");
+return start;
+}
+
+struct node * del_ith(int i,struct node *start)
+{
+int j=1;
+struct node *temp,*save;
+temp=start;
+while(j!=(i-1))
+{
+temp=temp->link;
+j++;
+}
+save=temp->link;
+temp->link=temp->link->link;
+
+free(save);
+printf("\nElement deleted.\n");
+return start;
+}
+
+
+
+void search(struct node *start,int a)
+{
+int flag,ctr;
+struct node *temp;
+temp=start;
+flag=0;
+ctr=1;
+while(temp!=NULL)
+{
+if(temp->info==a)
+{
+flag=1;
+break;
+}
+else
+{
+
+
+temp=temp->link;
+ctr++;
+}
+}
+
+if(flag==0)
+printf("\nItem not found.");
+else
+printf("\nItem found at %dth position",ctr);
+}
+
+void display(struct node *start)
+{
+struct node *temp;
+temp=start;
+if(start==NULL)
+{
+printf("\nList Empty");
+}
+else
+{
+while(temp!=NULL)
+{
+printf("\n%d",temp->info);
+temp=temp->link;
+}
+}
+}
+

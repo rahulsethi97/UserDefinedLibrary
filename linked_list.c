@@ -1,0 +1,64 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include "library.h"
+
+void linked_list()
+{
+int a,info,n,i;
+struct node *start;
+while(1)
+{
+printf("\n1.Create a list.\n2.Insert an element.\n3.Delete an element.\n4.Search an element.\n5.Reverse\n6.Display.\n7.Exit.\nYour Choice: ");
+scanf("%d",&a);
+
+switch(a)
+{
+case 1:
+printf("\nHow many elements: ");
+scanf("%d",&n);
+for(i=0;i<n;i++)
+{
+ if(i==0)
+   {
+     start=create_node();
+     printf("\nEnter the element: ");
+     scanf("%d",&info);
+     start->info=info;
+   }
+else
+  {        
+     printf("\nEnter the element: ");
+     scanf("%d",&info);
+     start=create(info,start);
+  }
+}
+break;
+case 2:
+printf("\nEnter the element you want to insert: ");
+scanf("%d",&info);
+start=ins_ele(info,start);
+break;
+case 3:
+start=del_ele(start);
+break;
+case 4:
+printf("\nEnter the element you want to search: ");
+scanf("%d",&info);
+search(start,info);
+break;
+case 5:
+start=reverse(start);
+break;
+case 6:
+display(start);
+break;
+case 7:
+ system("reset");
+linkedlistmain();
+break;
+default:
+printf("\nWrong Choice");
+}
+}
+}
+

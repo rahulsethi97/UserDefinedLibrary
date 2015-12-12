@@ -1,0 +1,171 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+struct node
+{
+int info;
+struct node *link;
+};
+
+struct node *top1=NULL,*top2=NULL;
+int i=-1,j=-1;
+void push
+1(int);
+int pop1();
+void push2(int);
+int pop2();
+void display();
+void delete();
+//void insert(struct node*&);
+void transfer12();
+void transfer21();
+
+
+int main()
+{
+int k;
+int a,b,c;
+while(1)
+{
+printf("\n\n1.Create a queue.\n2.Delete an element.\n3.Insert new element.\n4.Display.\n5.Exit\nYour Choice: ");
+scanf("%d",&a);
+switch(a)
+{
+case 1:
+printf("\nHow many elements you want to enter? ");
+scanf("%d",&a);
+for(k=0;k<a;k++)
+{
+printf("\nEnter the element: ");
+scanf("%d",&b);
+push1(b);
+}
+break;
+case 2:
+delete();
+break;
+case 3:
+printf("\nEnter the element: ");
+scanf("%d",&b);
+push1(b);
+break;
+case 4:
+display();
+break;
+case 5:
+exit(0);
+}
+}
+return 0;
+}
+
+void push1(int c)
+{
+struct node *new;
+new=(struct node*)malloc(sizeof(struct node*));
+new->info=c;
+new->link=top1;
+top1=new;
+i++;
+}
+
+void push2(int c)
+{
+struct node *new;
+new=(struct node*)malloc(sizeof(struct node*));
+new->info=c;
+new->link=top2;
+top2=new;
+j++;
+}
+
+int pop1()
+{
+if(i==-1)
+{
+printf("\nStack Empty");
+return 0;
+}
+else
+{
+int n;
+struct node *save;
+save=top1;
+top1=top1->link;
+i--;
+n=save->info;
+return n;
+free(save);
+}
+}
+
+int pop2()
+{
+if(j==-1)
+{
+printf("\nStack Empty");
+return 0;
+}
+else
+{
+int n;
+struct node *save;
+save=top2;
+top2=top2->link;
+j--;
+n=save->info;
+return n;
+free(save);
+}
+}
+
+void delete()
+{
+transfer12();
+pop2();
+transfer21();
+}
+
+void transfer12()
+{
+int n;
+while(top1!=NULL)
+{
+n=pop1();
+push2(n);
+}
+}
+
+void transfer21()
+{
+int n;
+while(top2!=NULL)
+{
+n=pop2();
+push1(n);
+}
+}
+
+void display()
+{
+
+transfer12();
+if(j==-1)
+   {
+printf("\nStack Empty");
+   }
+else
+    {
+struct node *temp;
+temp=top2;
+while(temp!=NULL)
+{
+printf("\n%d",temp->info);
+temp=temp->link;
+}
+    }
+
+transfer21();
+}
+
+

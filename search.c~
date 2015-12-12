@@ -1,0 +1,27 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include "library.h"
+
+
+void search(struct node *start,int a)
+{
+int flag,ctr;
+struct node *temp;
+temp=start;
+flag=0;
+ctr=1;
+while(temp!=NULL)
+{
+if(temp->info==a)
+{
+flag=1;
+break;
+}
+else
+{
+
+
+temp=temp->link;
+ctr++;
+}
+}

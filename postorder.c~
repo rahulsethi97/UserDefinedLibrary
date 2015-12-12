@@ -1,0 +1,17 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include "library.h"
+typedef struct tree
+{  
+int data;
+struct tree *left,*right;
+int ht;
+}tree;
+
+void postorder(tree *T) {
+    if (T!= NULL) {
+      postorder(T->left);
+       postorder(T->right);
+       printf("%d ",T->data);
+         }
+}

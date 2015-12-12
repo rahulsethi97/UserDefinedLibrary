@@ -1,0 +1,30 @@
+#include<stdio.h>
+
+void TOH(int d,char tower1,char tower2,char tower3)
+{
+   if(d==1)
+     {
+      printf("\nShift top disk from tower %c to %c",tower1,tower2);
+     }
+  else
+{
+    TOH(d-1,tower1,tower3,tower2);
+      printf("\nShift top disk from tower %c to %c",tower1,tower2);
+   
+    TOH(d-1,tower3,tower2,tower1);
+}
+}
+void main()
+{
+int disk;
+printf("\nEnter the number of disks: ");
+scanf("%d",&disk);
+
+if(disk<1)
+  printf("\nNO disk to shift");
+else
+  printf("\nThere are %d disks in tower 1",disk);
+
+TOH(disk,'1','2','3');
+  printf("\n\n%d disks in tower 1 are shifted to tower 2",disk);
+}

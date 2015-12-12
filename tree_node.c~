@@ -1,0 +1,15 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include "library.h"
+typedef struct tree
+{  
+int data;
+struct tree *left,*right;
+int ht;
+}tree;
+
+
+tree* tree_node()
+{
+return ((tree*)malloc(sizeof(tree)));
+}

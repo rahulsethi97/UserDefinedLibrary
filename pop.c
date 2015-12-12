@@ -1,0 +1,25 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include "library.h"
+
+
+
+struct node * pop(struct node *top)
+{
+if(top==NULL)
+{
+printf("\nStack Empty");
+return 0;
+}
+else
+{
+struct node *save;
+save=top;
+top=top->link;
+
+printf("\nItem popped=%d",save->info);
+free(save);
+return top;
+}
+}
+

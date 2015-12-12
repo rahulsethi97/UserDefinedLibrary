@@ -1,0 +1,20 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include "library.h"
+
+
+struct node * del_last(struct node *start)
+{
+struct node *temp,*save;
+temp=start;
+while(temp->link->link!=NULL)
+{
+temp=temp->link;
+}
+save=temp->link;
+temp->link=NULL;
+free(save);
+printf("\nElement deleted.\n");
+return start;
+}
+
